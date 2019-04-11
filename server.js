@@ -1,11 +1,18 @@
-const net = require ('net');
+const net = require('net');
 
-//evert client is a socket
+//every client is a socket
+const server = net.createServer(connectedClient => {
+  console.log('client connected to server');
 
+  connectedClient.on('data', data => 
+  {
+    console.log(data.toString());
+    connectedClient.write(data);
+  });
 
-const server = net.createServer((client)=>{
-    console.log('client connected!!');
-    client.on('data', console.log(data));
+  //   client.pipe(client);
+
 });
 
-server.listen(7890);
+
+server.listen(8080);
